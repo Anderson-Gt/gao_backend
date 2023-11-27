@@ -40,7 +40,11 @@ export class UserService {
     const user = await this.userModel.findOne({ email: loginDto.email }).exec();
 
     if (user && (await bcrypt.compare(loginDto.password, user.password))) {
-      return { userId: user.id, isAdmin: user.isAdmin } as unknown as User;
+      return {
+        userId: user.id,
+        isAdmin: user.isAdmin,
+        name: user.name,
+      } as unknown as User;
     }
 
     return null;
