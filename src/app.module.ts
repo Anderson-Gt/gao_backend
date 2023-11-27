@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { AlienModule } from './alien/alien.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
-import { AlienModule } from './alien/alien.module';
-import { OmnitrixModule } from './omnitrix/omnitrix.module';
-import { MongooseModule } from '@nestjs/mongoose';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     ),
     UserModule,
     AlienModule,
-    OmnitrixModule,
+    CommentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

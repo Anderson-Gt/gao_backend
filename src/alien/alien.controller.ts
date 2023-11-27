@@ -39,6 +39,24 @@ export class AlienController {
     return await this.alienService.update(id, alien);
   }
 
+  @Put('transformation/:id')
+  async transformation(@Param('id') id: string) {
+    return await this.alienService.transformation(id);
+  }
+
+  @Put('favorite/:id')
+  async favorite(
+    @Param('id') id: string,
+    @Body('isFavorite') isFavorite: boolean,
+  ) {
+    return await this.alienService.favorite(id, isFavorite);
+  }
+
+  @Get('favorites')
+  async getFavorites() {
+    return await this.alienService.getFavorites();
+  }
+
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<Alien> {
     return await this.alienService.delete(id);

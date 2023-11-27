@@ -32,6 +32,43 @@ export class AlienService {
     });
   }
 
+  async transformation(id: string) {
+    try {
+      const alien = await this.alienModel.findById(id);
+      alien.use += 1;
+      await alien.save();
+      return { success: true };
+    } catch (error) {
+      return {
+        success: false,
+        error: 'No se pudo realizar la transformación.',
+      };
+    }
+  }
+
+  async favorite(id: string, isFavorite: boolean) {
+    try {
+      const alien = await this.alienModel.findById(id);
+      alien.favorite = isFavorite;
+      await alien.save();
+      return { success: true };
+    } catch (error) {
+      return {
+        success: false,
+        error: 'No se pudo marcar/desmarcar como favorito.',
+      };
+    }
+  }
+
+  async getFavorites(): Promise<Alien[]> {
+    try {
+      const favorites = await this.alienModel.find({ favorite: true }).exec();
+      return favorites;
+    } catch (error) {
+      throw new Error('No se pudieron obtener los favoritos.');
+    }
+  }
+
   async delete(id: string): Promise<Alien> {
     return await this.alienModel.findByIdAndRemove(id);
   }
