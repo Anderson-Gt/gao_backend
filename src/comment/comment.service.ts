@@ -14,7 +14,7 @@ export class CommentService {
     commentDto: { userId: string; comment: string },
   ) {
     const comment = new this.commentModel({
-      userId: commentDto.userId,
+      userName: commentDto.userId,
       comment: commentDto.comment,
       alienId,
     });
